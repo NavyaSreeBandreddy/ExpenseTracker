@@ -22,7 +22,6 @@ It allows users to record daily expenses, view them in a table, and analyze spen
 
 * Java (Core + OOP)
 * Java Swing (GUI)
-* AWT Graphics (for chart visualization)
 * Collections Framework (ArrayList, HashMap)
 
 ---
