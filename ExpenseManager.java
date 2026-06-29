@@ -4,14 +4,15 @@ import java.util.Map;
 
 public class ExpenseManager {
 
+    // List to store all expenses
     private ArrayList<Expense> list = new ArrayList<>();
 
-    //  Add Expense
+    // Add Expense
     public void addExpense(Expense e) {
         list.add(e);
     }
 
-    //  Remove Expense
+    // Remove Expense
     public void removeExpense(int index) {
         if (index >= 0 && index < list.size()) {
             list.remove(index);
@@ -20,28 +21,32 @@ public class ExpenseManager {
         }
     }
 
-    //  Total Expense
+    // Calculate Total Expense
     public double getTotal() {
         double total = 0;
+
         for (Expense e : list) {
-            total += e.amount;
+            total += e.getAmount();   // Using Getter
         }
+
         return total;
     }
 
-    //  Category-wise Total (IMPORTANT for charts)
+    // Category-wise Total (Used for Chart)
     public Map<String, Double> getCategoryTotals() {
+
         Map<String, Double> categoryMap = new HashMap<>();
 
         for (Expense e : list) {
-            String category = e.category;
 
-            // if category already exists → add amount
+            String category = e.getCategory();   // Using Getter
+            double amount = e.getAmount();       // Using Getter
+
             if (categoryMap.containsKey(category)) {
                 categoryMap.put(category,
-                        categoryMap.get(category) + e.amount);
+                        categoryMap.get(category) + amount);
             } else {
-                categoryMap.put(category, e.amount);
+                categoryMap.put(category, amount);
             }
         }
 
@@ -53,7 +58,7 @@ public class ExpenseManager {
         return list;
     }
 
-    //  Clear All Data (optional feature)
+    // Clear All Expenses
     public void clearAll() {
         list.clear();
     }

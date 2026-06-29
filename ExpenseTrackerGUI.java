@@ -6,7 +6,8 @@ public class ExpenseTrackerGUI extends JFrame {
 
     ExpenseManager manager = new ExpenseManager();
 
-    JTextField titleField, amountField, categoryField, dateField;
+    JTextField titleField, amountField, dateField;
+    JComboBox<String> categoryBox;
     JLabel totalLabel;
     DefaultTableModel tableModel;
     JTable table;
@@ -23,7 +24,17 @@ public class ExpenseTrackerGUI extends JFrame {
 
         titleField = new JTextField();
         amountField = new JTextField();
-        categoryField = new JTextField();
+        String[] categories = {
+                    "Food",
+                    "Transport",
+                    "Shopping",
+                    "Bills",
+                    "Entertainment",
+                    "Health",
+                    "Education",
+                    "Other"
+            };
+        categoryBox = new JComboBox<>(categories);
         dateField = new JTextField();
 
         JButton addBtn = new JButton("Add Expense");
@@ -37,7 +48,7 @@ public class ExpenseTrackerGUI extends JFrame {
 
         panel.add(titleField);
         panel.add(amountField);
-        panel.add(categoryField);
+        panel.add(categoryBox);
         panel.add(dateField);
         panel.add(addBtn);
 
@@ -68,10 +79,10 @@ public class ExpenseTrackerGUI extends JFrame {
             try {
                 String title = titleField.getText();
                 double amount = Double.parseDouble(amountField.getText());
-                String category = categoryField.getText();
+                String category = (String) categoryBox.getSelectedItem();
                 String date = dateField.getText();
 
-                if (title.isEmpty() || category.isEmpty() || date.isEmpty()) {
+                if (title.isEmpty() || date.isEmpty())  {
                     JOptionPane.showMessageDialog(this, "Please fill all fields!");
                     return;
                 }
@@ -118,11 +129,11 @@ public class ExpenseTrackerGUI extends JFrame {
     }
 
     void clearFields() {
-        titleField.setText("");
-        amountField.setText("");
-        categoryField.setText("");
-        dateField.setText("");
-    }
+    titleField.setText("");
+    amountField.setText("");
+    categoryBox.setSelectedIndex(0);
+    dateField.setText("");
+}
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
